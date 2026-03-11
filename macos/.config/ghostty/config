@@ -8,7 +8,7 @@ font-thicken = true
 adjust-cell-height = 20%
 
 # Theme
-theme = catppuccin-mocha
+theme = GitHub-Dark-Default
 
 # Window
 window-padding-x = 8
