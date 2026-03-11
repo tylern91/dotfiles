@@ -39,6 +39,7 @@ dotfiles/
 ├── common/                    # Configs stowed to $HOME
 │   ├── .zshrc                 # Zsh configuration
 │   ├── .zsh_plugins.txt       # Antidote plugin list
+│   ├── .p10k.zsh              # Powerlevel10k theme configuration
 │   └── .config/
 │       └── git/config         # Git configuration
 ├── macos/                     # macOS-specific configs stowed to $HOME
@@ -58,6 +59,7 @@ GNU Stow creates symlinks from the repo into `$HOME`. Each top-level directory (
 # After stowing:
 ~/.zshrc              → ~/.dotfiles/common/.zshrc
 ~/.zsh_plugins.txt    → ~/.dotfiles/common/.zsh_plugins.txt
+~/.p10k.zsh           → ~/.dotfiles/common/.p10k.zsh
 ~/.config/ghostty/    → ~/.dotfiles/macos/.config/ghostty/
 ~/.config/git/config  → ~/.dotfiles/common/.config/git/config
 ```

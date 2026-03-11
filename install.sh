@@ -197,7 +197,7 @@ show_status() {
 
   echo ""
   echo "Symlinks:"
-  for target in .zshrc .zsh_plugins.txt .config/ghostty; do
+  for target in .zshrc .zsh_plugins.txt .p10k.zsh .config/ghostty; do
     local full="$HOME/$target"
     if [[ -L "$full" ]]; then
       echo "  ✓ ~/$target -> $(readlink "$full")"
@@ -239,7 +239,6 @@ main() {
       echo ""
       log_success "✓ Dotfiles installation complete!"
       log_info "Open a new terminal (Ghostty) to use your new config."
-      log_info "Run 'p10k configure' if prompted to set up your prompt theme."
       ;;
     uninstall)
       unstow_packages
