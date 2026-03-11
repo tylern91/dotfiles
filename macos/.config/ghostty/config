@@ -6,9 +6,9 @@ cursor-style = block
 cursor-style-blink = false
 
 # Font
-adjust-cell-height = 30%
+adjust-cell-height = 20%
 font-family = JetBrains Mono
-font-size = 20
+font-size = 14
 font-thicken = true
 
 # Keybindings — macOS native feel
@@ -33,7 +33,7 @@ scrollback-limit = 100000
 shell-integration = zsh
 
 # Theme
-theme = GitHub-Dark-Default
+theme = GitHub Dark
 
 # Window
 background-blur = 90
@@ -41,7 +41,7 @@ background-opacity = 0.8
 confirm-close-surface = false
 macos-option-as-alt = true
 macos-titlebar-style = tabs
-window-colorspace = "Display P3"
+window-colorspace = display-p3
 window-decoration = true
 window-padding-balance = true
 window-padding-x = 10
