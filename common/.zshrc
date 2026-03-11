@@ -144,6 +144,8 @@ export PATH="$PATH:$HOME/.lmstudio/bin"
 # ---------------------------------------------------------------------------
 # Environment
 # ---------------------------------------------------------------------------
+export EDITOR="vim"
+export VISUAL="vim"
 export GPG_TTY=$(tty)
 export HISTFILE=~/.zsh_history
 export SAVEHIST=1000000000
