@@ -79,7 +79,7 @@ brew "tfupdate"                         # Update Terraform version constraints
 brew "tfk8s"                            # Kubernetes YAML to Terraform HCL
 brew "checkov"                          # IaC security scanner
 brew "hashicorp/tap/vault"              # HashiCorp Vault
-brew "spacelift-io/spacelift/spacectl"  # Spacelift CLI
+cask "spacelift-io/spacelift/spacectl"  # Spacelift CLI
 
 # ---------------------------------------------------------------------------
 # Cloud CLIs
