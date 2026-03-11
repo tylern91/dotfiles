@@ -18,6 +18,28 @@ log_warning() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 log_error()   { echo -e "${RED}[ERROR]${NC} $1"; }
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
+STATE_FILE="$DOTFILES_DIR/.install-state"
+
+# ---------- Checkpoint ------------------------------------------------------
+
+step_done()      { [[ -f "$STATE_FILE" ]] && grep -qxF "${1}:${2}" "$STATE_FILE"; }
+mark_step_done() { echo "${1}:${2}" >> "$STATE_FILE"; }
+
+clear_steps() {
+  [[ -f "$STATE_FILE" ]] || return
+  { grep -v "^${1}:" "$STATE_FILE" || true; } > "${STATE_FILE}.tmp"
+  mv "${STATE_FILE}.tmp" "$STATE_FILE"
+}
+
+run_step() {
+  local cmd="$1" step="$2" fn="$3"
+  if step_done "$cmd" "$step"; then
+    log_info "  [skip] $step (already completed)"
+    return
+  fi
+  "$fn"
+  mark_step_done "$cmd" "$step"
+}
 
 # ---------- Checks ---------------------------------------------------------
 
@@ -153,6 +175,7 @@ show_usage() {
   echo "  fonts        Install terminal fonts"
   echo "  backup       Backup existing dotfiles only"
   echo "  status       Show current dotfiles status"
+  echo "  reset        Clear checkpoint state (force fresh run)"
   echo "  help         Show this message"
 }
 
@@ -184,6 +207,16 @@ show_status() {
       echo "  ✗ ~/$target (missing)"
     fi
   done
+
+  echo ""
+  echo "Checkpoints ($STATE_FILE):"
+  if [[ -f "$STATE_FILE" ]] && [[ -s "$STATE_FILE" ]]; then
+    while IFS= read -r line; do
+      echo "  ✓ $line"
+    done < "$STATE_FILE"
+  else
+    echo "  (none)"
+  fi
 }
 
 # ---------- Main ------------------------------------------------------------
@@ -195,13 +228,14 @@ main() {
 
   case "$command" in
     install)
-      ensure_homebrew
-      ensure_stow
-      backup_dotfiles
-      install_brewfile
-      stow_packages
-      setup_antidote
-      install_fonts
+      run_step install homebrew  ensure_homebrew
+      run_step install stow      ensure_stow
+      run_step install backup    backup_dotfiles
+      run_step install brewfile  install_brewfile
+      run_step install stow_pkgs stow_packages
+      run_step install antidote  setup_antidote
+      run_step install fonts     install_fonts
+      clear_steps install
       echo ""
       log_success "✓ Dotfiles installation complete!"
       log_info "Open a new terminal (Ghostty) to use your new config."
@@ -211,11 +245,12 @@ main() {
       unstow_packages
       ;;
     restow)
-      ensure_homebrew
-      ensure_stow
-      unstow_packages
-      stow_packages
-      setup_antidote
+      run_step restow homebrew  ensure_homebrew
+      run_step restow stow      ensure_stow
+      run_step restow unstow    unstow_packages
+      run_step restow stow_pkgs stow_packages
+      run_step restow antidote  setup_antidote
+      clear_steps restow
       log_success "Restow complete"
       ;;
     brew)
@@ -234,6 +269,14 @@ main() {
       ;;
     status)
       show_status
+      ;;
+    reset)
+      if [[ -f "$STATE_FILE" ]]; then
+        rm "$STATE_FILE"
+        log_success "Checkpoint state cleared — next run will start fresh"
+      else
+        log_info "No checkpoint state found"
+      fi
       ;;
     -h|--help|help)
       show_usage
