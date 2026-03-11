@@ -169,6 +169,7 @@ brew "groff"                            # GNU troff text formatter
 brew "graphviz"                         # Graph visualization
 brew "gtop"                             # System monitoring dashboard
 brew "htop"                             # Improved top
+brew "mactop"                           # macOS system monitor (Apple Silicon metrics)
 brew "isort"                            # Python import sorter
 brew "pylint"                           # Python linter
 brew "tree"                             # Directory tree display
