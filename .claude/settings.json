@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Bash(stow *)",
+      "Bash(git *)",
+      "Bash(./install.sh *)",
+      "Bash(brew bundle *)",
+      "Bash(ls *)",
+      "Bash(find *)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(wc *)",
+      "Bash(diff *)",
+      "Bash(mkdir *)"
+    ],
+    "deny": [
+      "Bash(rm -rf /)*",
+      "Bash(rm -rf ~)*",
+      "Write(~/.zshrc)",
+      "Write(~/.bashrc)",
+      "Write(~/.bash_profile)"
+    ]
+  },
+  "env": {
+    "DOTFILES_DIR": "."
+  }
+}

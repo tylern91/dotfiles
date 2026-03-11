@@ -1,0 +1,9 @@
+# Files in the dotfiles root that GNU Stow should NOT symlink
+\.git
+\.gitignore
+\.stow-local-ignore
+install\.sh
+Brewfile
+README\.md
+LICENSE
+scripts

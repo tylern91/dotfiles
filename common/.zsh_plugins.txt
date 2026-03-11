@@ -1,0 +1,20 @@
+# Antidote plugin list — one plugin per line
+# Regenerate static bundle: antidote bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.zsh
+
+# Completions fpath — must be added to FPATH before compinit
+zsh-users/zsh-completions kind:fpath
+
+# fzf-tab — replace default tab-completion menu with fzf picker
+# Must come after zsh-completions and before autosuggestions/syntax-highlighting
+Aloxaf/fzf-tab
+
+# Autosuggestions — inline history-based suggestions
+# Async mode and strategy configured in .zshrc (ZSH_AUTOSUGGEST_USE_ASYNC=1)
+zsh-users/zsh-autosuggestions
+
+# History substring search — Up/Down arrows search by already-typed prefix
+# Key bindings are configured in .zshrc after the bundle is sourced
+zsh-users/zsh-history-substring-search
+
+# Syntax highlighting — must be last
+zsh-users/zsh-syntax-highlighting

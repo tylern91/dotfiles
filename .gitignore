@@ -1,0 +1,9 @@
+.DS_Store
+*.zwc
+*.swp
+*~
+.zsh_plugins.zsh
+.zcompdump*
+.zsh/cache/
+.zsh/completions/
+Brewfile.lock.json
