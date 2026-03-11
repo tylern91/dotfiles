@@ -81,7 +81,7 @@ install_brewfile() {
     return
   fi
   log_info "Installing Homebrew dependencies from Brewfile..."
-  brew bundle --file="$DOTFILES_DIR/Brewfile" --no-lock
+  brew bundle --file="$DOTFILES_DIR/Brewfile"
   log_success "Brew dependencies installed"
 }
 
@@ -211,6 +211,8 @@ main() {
       unstow_packages
       ;;
     restow)
+      ensure_homebrew
+      ensure_stow
       unstow_packages
       stow_packages
       setup_antidote
